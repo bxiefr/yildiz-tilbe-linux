@@ -1,0 +1,56 @@
+#!/bin/sh
+# Calamares kurulum programindaki Debian yazilarini ve gorsellerini Yildiz Tilbe Linux yapar.
+# Kritik degildir: bir adim basarisiz olursa derlemeyi durdurmaz (set -e yok).
+
+SURUM="1.0"
+if [ -s /etc/yildiz-surum ]; then
+  SURUM=$(cat /etc/yildiz-surum)
+fi
+
+REPO="https://github.com/bxiefr/yildiz-tilbe-linux"
+BRDIR=/etc/calamares/branding/debian
+BR="$BRDIR/branding.desc"
+
+# ---------- Yazilar ----------
+if [ -f "$BR" ]; then
+  sed -i -E \
+    -e "s|^([[:space:]]*productName:).*|\1 Yıldız Tilbe Linux|" \
+    -e "s|^([[:space:]]*shortProductName:).*|\1 Yıldız Tilbe Linux|" \
+    -e "s|^([[:space:]]*version:).*|\1 ${SURUM}|" \
+    -e "s|^([[:space:]]*shortVersion:).*|\1 ${SURUM}|" \
+    -e "s|^([[:space:]]*versionedName:).*|\1 Yıldız Tilbe Linux ${SURUM}|" \
+    -e "s|^([[:space:]]*shortVersionedName:).*|\1 Yıldız Tilbe Linux|" \
+    -e "s|^([[:space:]]*bootloaderEntryName:).*|\1 Yildiz Tilbe Linux|" \
+    -e "s|^([[:space:]]*productUrl:).*|\1 ${REPO}|" \
+    -e "s|^([[:space:]]*supportUrl:).*|\1 ${REPO}/issues|" \
+    -e "s|^([[:space:]]*knownIssuesUrl:).*|\1 ${REPO}/issues|" \
+    -e "s|^([[:space:]]*releaseNotesUrl:).*|\1 ${REPO}/releases|" \
+    "$BR" || true
+
+  # ---------- Gorseller ----------
+  LOGO=""
+  for aday in /usr/share/yildiz/logo.png /usr/share/pixmaps/yildiz-logo.png; do
+    if [ -f "$aday" ]; then LOGO="$aday"; break; fi
+  done
+  DUVAR=$(ls /usr/share/backgrounds/yildiz/wallpaper.* 2>/dev/null | head -n 1)
+
+  for anahtar in productLogo productIcon productWelcome; do
+    dosya=$(sed -n -E "s|^[[:space:]]*${anahtar}:[[:space:]]*\"?([^\"#[:space:]]+)\"?.*|\1|p" "$BR" | head -n 1)
+    [ -n "$dosya" ] || continue
+    if [ "$anahtar" = "productWelcome" ]; then
+      kaynak="$DUVAR"
+    else
+      kaynak="$LOGO"
+    fi
+    if [ -n "$kaynak" ] && [ -f "$kaynak" ]; then
+      cp "$kaynak" "$BRDIR/$dosya" || true
+    fi
+  done
+fi
+
+# ---------- Masaustundeki "Install Debian" simgesi ----------
+for f in $(grep -rl --include='*.desktop' calamares /usr/share/applications /etc/skel 2>/dev/null); do
+  sed -i -E "s/^(Name(\[[^]]*\])?)=.*/\1=Yıldız Tilbe Linux Kur/" "$f" || true
+done
+
+exit 0
