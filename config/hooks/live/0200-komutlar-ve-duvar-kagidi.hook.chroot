@@ -1,0 +1,60 @@
+#!/bin/sh
+# Meme komutlarini ve duvar kagidi ayarini sistemin icine yazar (chroot icinde calisir).
+# Gizli dosyalara (.bash_aliases, .config) bagimli degildir.
+set -e
+
+# ---------- Komutlar: /usr/local/bin ----------
+cat > /usr/local/bin/yildiz <<'EOF'
+#!/bin/sh
+figlet "Yildiz Tilbe Linux" | lolcat
+EOF
+
+cat > /usr/local/bin/hosgeldin <<'EOF'
+#!/bin/sh
+exec fastfetch
+EOF
+
+cat > /usr/local/bin/guncelle <<'EOF'
+#!/bin/sh
+sudo apt update && sudo apt full-upgrade -y
+EOF
+
+chmod +x /usr/local/bin/yildiz /usr/local/bin/hosgeldin /usr/local/bin/guncelle
+
+# ---------- Terminal acilinca karsilama (tum kullanicilar) ----------
+cat >> /etc/bash.bashrc <<'EOF'
+
+# Yildiz Tilbe Linux karsilama
+case $- in
+  *i*)
+    if command -v fortune >/dev/null 2>&1 && command -v cowsay >/dev/null 2>&1; then
+      fortune -s | cowsay
+    fi
+    ;;
+esac
+EOF
+
+# ---------- Duvar kagidi: oturum acilinca tum ekranlara uygula ----------
+cat > /usr/local/bin/yildiz-duvar-kagidi <<'EOF'
+#!/bin/sh
+DUVAR=/usr/share/backgrounds/yildiz/wallpaper.png
+[ -f "$DUVAR" ] || exit 0
+sleep 3
+for cikis in $(xrandr --query | awk '/ connected/ {print $1}'); do
+  xfconf-query -c xfce4-desktop -p "/backdrop/screen0/monitor${cikis}/workspace0/last-image" -n -t string -s "$DUVAR"
+  xfconf-query -c xfce4-desktop -p "/backdrop/screen0/monitor${cikis}/workspace0/image-style" -n -t int -s 5
+done
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -n -t string -s "$DUVAR"
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/image-style -n -t int -s 5
+EOF
+chmod +x /usr/local/bin/yildiz-duvar-kagidi
+
+mkdir -p /etc/xdg/autostart
+cat > /etc/xdg/autostart/yildiz-duvar-kagidi.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Yildiz Tilbe Duvar Kagidi
+Exec=/usr/local/bin/yildiz-duvar-kagidi
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
+EOF
