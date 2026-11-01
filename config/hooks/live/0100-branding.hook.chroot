@@ -3,10 +3,10 @@
 set -e
 
 cat > /etc/os-release <<'EOF'
-PRETTY_NAME="Yildiz Tilbe Linux 1.0"
+PRETTY_NAME="Yildiz Tilbe Linux"
 NAME="Yildiz Tilbe Linux"
 VERSION_ID="1.0"
-VERSION="1.0 (Ilk Konser)"
+VERSION="1.0.1"
 ID=yildiztilbe
 ID_LIKE=debian
 HOME_URL="https://github.com/bxiefr/yildiz-tilbe-linux"
