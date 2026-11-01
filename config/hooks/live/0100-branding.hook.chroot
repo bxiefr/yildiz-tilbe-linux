@@ -1,12 +1,18 @@
 #!/bin/sh
 # Sistem kimligini degistirir (chroot icinde calisir).
+# Surum, Actions'ta girilen degerden gelir (workflow /etc/yildiz-surum dosyasini yazar).
 set -e
 
-cat > /etc/os-release <<'EOF'
+SURUM="1.0"
+if [ -s /etc/yildiz-surum ]; then
+  SURUM=$(cat /etc/yildiz-surum)
+fi
+
+cat > /etc/os-release <<EOF
 PRETTY_NAME="Yildiz Tilbe Linux"
 NAME="Yildiz Tilbe Linux"
-VERSION_ID="1.0"
-VERSION="1.0.1"
+VERSION_ID="${SURUM}"
+VERSION="${SURUM}"
 ID=yildiztilbe
 ID_LIKE=debian
 HOME_URL="https://github.com/bxiefr/yildiz-tilbe-linux"
@@ -14,7 +20,7 @@ EOF
 
 echo "yildiz-tilbe" > /etc/hostname
 
-cat > /etc/issue <<'EOF'
-Yildiz Tilbe Linux \n \l
+cat > /etc/issue <<EOF
+Yildiz Tilbe Linux ${SURUM} \\n \\l
 
 EOF
