@@ -34,7 +34,7 @@
       position: fixed; 
       inset: -20px; 
       z-index: -2;
-      background: url("wallpaper") center / cover no-repeat;
+      background: url("usr/share/backgrounds/yildiz/wallpaper") center / cover no-repeat;
       filter: blur(8px);
       transform: scale(1.05);
       transition: background-image 1s ease-in-out;
@@ -330,41 +330,41 @@
       <!-- wallpaper -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="wallpaper" alt="Wallpaper">
+          <img src="usr/share/backgrounds/yildiz/wallpaper" alt="Wallpaper">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper</h4>
-          <a class="wp-btn" href="wallpaper" target="_blank" id="wp-btn-text">Görüntüle</a>
+          <a class="wp-btn" href="usr/share/backgrounds/yildiz/wallpaper" target="_blank" id="wp-btn-text">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper1 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="wallpaper1" alt="Wallpaper 1">
+          <img src="usr/share/backgrounds/yildiz/wallpaper1" alt="Wallpaper 1">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 1</h4>
-          <a class="wp-btn" href="wallpaper1" target="_blank" id="wp-btn-text2">Görüntüle</a>
+          <a class="wp-btn" href="usr/share/backgrounds/yildiz/wallpaper1" target="_blank" id="wp-btn-text2">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper2 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="wallpaper2" alt="Wallpaper 2">
+          <img src="usr/share/backgrounds/yildiz/wallpaper2" alt="Wallpaper 2">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 2</h4>
-          <a class="wp-btn" href="wallpaper2" target="_blank" id="wp-btn-text3">Görüntüle</a>
+          <a class="wp-btn" href="usr/share/backgrounds/yildiz/wallpaper2" target="_blank" id="wp-btn-text3">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper3 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="wallpaper3" alt="Wallpaper 3">
+          <img src="usr/share/backgrounds/yildiz/wallpaper3" alt="Wallpaper 3">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 3</h4>
-          <a class="wp-btn" href="wallpaper3" target="_blank" id="wp-btn-text4">Görüntüle</a>
+          <a class="wp-btn" href="usr/share/backgrounds/yildiz/wallpaper3" target="_blank" id="wp-btn-text4">Görüntüle</a>
         </div>
       </div>
     </div>
@@ -386,30 +386,16 @@
 
   <script>
     // --- ARKA PLAN OTOMATİK SLAYT (SLIDESHOW) ---
-    const wallpapers = ["wallpaper", "wallpaper1", "wallpaper2", "wallpaper3"];
+    const wallpapers = [
+      "usr/share/backgrounds/yildiz/wallpaper", 
+      "usr/share/backgrounds/yildiz/wallpaper1", 
+      "usr/share/backgrounds/yildiz/wallpaper2", 
+      "usr/share/backgrounds/yildiz/wallpaper3"
+    ];
     let currentIndex = 0;
 
-    function changeBackgroundSlide() {
-      currentIndex = (currentIndex + 1) % wallpapers.length;
-      // body::before öğesinin background-image'ini değiştiriyoruz
-      document.documentElement.style.setProperty('--bg-image', `url('${wallpapers[currentIndex]}')`);
-      // Doğrudan stil enjeksiyonu ile arka planı güncelleyelim:
-      document.body.style.setProperty('--current-bg', `url('${wallpapers[currentIndex]}')`);
-    }
-
-    // CSS'te body::before için dinamik URL kullanabilmek adına:
-    const styleSheet = document.styleSheets[0];
-    // Her 6 saniyede bir arka plan duvar kağıdını değiştir (slayt etkisi)
     setInterval(() => {
       currentIndex = (currentIndex + 1) % wallpapers.length;
-      document.body.style.setProperty('--bg-url', `url('${wallpapers[currentIndex]}')`);
-      // ::before elementini tetiklemek için bir kural güncelleyelim
-    }, 5000);
-
-    // Daha temiz JS tabanlı arka plan değiştirme:
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % wallpapers.length;
-      // Style tag ekleyerek body::before arka planını güncelliyoruz
       let dynamicStyle = document.getElementById('dynamic-bg');
       if (!dynamicStyle) {
         dynamicStyle = document.createElement('style');
@@ -417,8 +403,7 @@
         document.head.appendChild(dynamicStyle);
       }
       dynamicStyle.innerHTML = `body::before { background-image: url('${wallpapers[currentIndex]}') !important; }`;
-    }, 6000); // 6 saniyede bir değişir
-
+    }, 6000);
 
     // --- ÇOKLU DİL DESTEĞİ (i18n) ---
     const translations = {
