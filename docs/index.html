@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Yıldız Tilbe Linux</title>
+  <meta name="description" content="Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.">
   <style>
     :root { --pembe: #ff3d9a; --mor: #6a1b9a; --koyu: #1a0b2e; }
     * { box-sizing: border-box; }
@@ -12,27 +13,82 @@
       font-family: system-ui, sans-serif; color: #fff; text-align: center;
       background: linear-gradient(135deg, var(--koyu), var(--mor));
     }
-    main { padding: 2rem 1rem; max-width: 640px; }
+    /* Arka plan görseli (hafif blur) */
+    body::before {
+      content: ""; position: fixed; inset: -20px; z-index: -2;
+      background: url("yildiztilbe.jpg") center / cover no-repeat;
+      filter: blur(6px);
+    }
+    /* Yazılar okunsun diye hafif koyu katman */
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: -1;
+      background: rgba(20, 6, 42, .45);
+    }
+    main { padding: 2rem 1rem; max-width: 640px; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
     h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 0 0 .5rem; color: var(--pembe); }
     p { font-size: 1.15rem; line-height: 1.6; }
+    ul { list-style: none; padding: 0; margin: 1.5rem 0; font-size: 1.05rem; line-height: 1.9; }
     .btn {
       display: inline-block; margin: 1rem .4rem; padding: .9rem 1.6rem;
       background: var(--pembe); color: #fff; border-radius: 999px;
-      text-decoration: none; font-weight: 700;
+      text-decoration: none; font-weight: 700; text-shadow: none;
     }
     .btn.ikinci { background: transparent; border: 2px solid var(--pembe); }
-    code { background: rgba(255,255,255,.12); padding: .2rem .5rem; border-radius: 6px; }
-    small { opacity: .7; display: block; margin-top: 2rem; }
+    code { background: rgba(255,255,255,.15); padding: .2rem .5rem; border-radius: 6px; }
+    small { opacity: .8; display: block; margin-top: 2rem; }
+
+    /* Müzik */
+    .muzik {
+      position: fixed; right: 16px; bottom: 16px; z-index: 10;
+      padding: .7rem 1.1rem; border: 0; border-radius: 999px;
+      background: var(--pembe); color: #fff; font-weight: 700; cursor: pointer;
+    }
+    #oynatici { position: fixed; left: 16px; bottom: 16px; z-index: 10; }
+    #oynatici iframe { border: 0; border-radius: 12px; }
   </style>
 </head>
 <body>
   <main>
     <h1>Yıldız Tilbe Linux</h1>
-    <p>GNU/Linux'tan daha büyük olma yolunda. Debian tabanlı, XFCE masaüstlü, tamamen meme.</p>
+    <p>Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.</p>
+    <ul>
+      <li>🐧 Debian 13 (trixie) tabanlı, kararlı ve güvenilir</li>
+      <li>🖥️ Hafif ve hızlı XFCE masaüstü</li>
+      <li>🇹🇷 Türkçe dil, klavye ve saat dilimi hazır</li>
+      <li>💿 USB'den canlı açılır, beğenirsen kurulur</li>
+      <li>🎉 Terminalde meme komutları ve renkli karşılama</li>
+    </ul>
     <a class="btn" href="https://github.com/bxiefr/yildiz-tilbe-linux/releases/latest">ISO İndir</a>
     <a class="btn ikinci" href="https://github.com/bxiefr/yildiz-tilbe-linux">GitHub</a>
     <p>Kurulumdan sonra terminale <code>yildiz</code> yaz.</p>
     <small>Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile bağlantısı yoktur.</small>
   </main>
+
+  <button class="muzik" id="muzik" type="button">🎵 Müziği Aç</button>
+  <div id="oynatici"></div>
+
+  <script>
+    // Şarkıların YouTube video ID'leri (istediğin kadar ekleyebilirsin)
+    const IDS = ["yG-ODhNbmbQ", "xw1k4px1uQs", "6pYgGItOqtE"];
+
+    const btn = document.getElementById("muzik");
+    const kutu = document.getElementById("oynatici");
+    let caliyor = false;
+
+    btn.addEventListener("click", () => {
+      if (!caliyor) {
+        kutu.innerHTML =
+          '<iframe width="200" height="200" ' +
+          'src="https://www.youtube.com/embed/' + IDS[0] +
+          '?autoplay=1&loop=1&playlist=' + IDS.join(",") + '" ' +
+          'allow="autoplay; encrypted-media" title="Müzik"></iframe>';
+        btn.textContent = "🔇 Müziği Kapat";
+      } else {
+        kutu.innerHTML = "";
+        btn.textContent = "🎵 Müziği Aç";
+      }
+      caliyor = !caliyor;
+    });
+  </script>
 </body>
 </html>
