@@ -7,88 +7,364 @@
   <meta name="description" content="Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.">
   <link rel="icon" type="image/png" href="yildiz-logo.png">
   <style>
-    :root { --pembe: #ff3d9a; --mor: #6a1b9a; --koyu: #1a0b2e; }
+    :root { 
+      --pembe: #ff3d9a; 
+      --pembe-hover: #e02b82;
+      --mor: #6a1b9a; 
+      --koyu: #1a0b2e; 
+      --kart-bg: rgba(26, 11, 46, 0.65);
+    }
     * { box-sizing: border-box; }
     body {
-      margin: 0; min-height: 100vh; display: grid; place-items: center;
-      font-family: system-ui, sans-serif; color: #fff; text-align: center;
+      margin: 0; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      color: #fff; 
+      text-align: center;
       background: linear-gradient(135deg, var(--koyu), var(--mor));
+      background-attachment: fixed;
     }
-    /* Arka plan görseli (hafif blur) */
-    body::before {
-      content: ""; position: fixed; inset: -20px; z-index: -2;
-      background: url("yildiztilbe.jpg") center / cover no-repeat;
-      filter: blur(6px);
-    }
-    /* Yazılar okunsun diye hafif koyu katman */
-    body::after {
-      content: ""; position: fixed; inset: 0; z-index: -1;
-      background: rgba(20, 6, 42, .45);
-    }
-    main { padding: 2rem 1rem; max-width: 640px; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
-    .logo { width: 160px; height: 160px; object-fit: contain; filter: drop-shadow(0 0 24px rgba(255,61,154,.6)); }
-    h1 { font-size: clamp(2rem, 8vw, 3.5rem); margin: 0 0 .5rem; color: var(--pembe); }
-    p { font-size: 1.15rem; line-height: 1.6; }
-    ul { list-style: none; padding: 0; margin: 1.5rem 0; font-size: 1.05rem; line-height: 1.9; }
-    .btn {
-      display: inline-block; margin: 1rem .4rem; padding: .9rem 1.6rem;
-      background: var(--pembe); color: #fff; border-radius: 999px;
-      text-decoration: none; font-weight: 700; text-shadow: none;
-    }
-    .btn.ikinci { background: transparent; border: 2px solid var(--pembe); }
-    code { background: rgba(255,255,255,.15); padding: .2rem .5rem; border-radius: 6px; }
-    small { opacity: .8; display: block; margin-top: 2rem; }
 
-    /* Müzik */
-    .muzik {
-      position: fixed; right: 16px; bottom: 16px; z-index: 10;
-      padding: .7rem 1.1rem; border: 0; border-radius: 999px;
-      background: var(--pembe); color: #fff; font-weight: 700; cursor: pointer;
+    /* Arka plan görseli */
+    body::before {
+      content: ""; 
+      position: fixed; 
+      inset: -20px; 
+      z-index: -2;
+      background: url("yildiztilbe.jpg") center / cover no-repeat;
+      filter: blur(8px);
+      transform: scale(1.05);
     }
-    #oynatici { position: fixed; left: 16px; bottom: 16px; z-index: 10; }
-    #oynatici iframe { border: 0; border-radius: 12px; }
+    body::after {
+      content: ""; 
+      position: fixed; 
+      inset: 0; 
+      z-index: -1;
+      background: rgba(15, 5, 30, 0.65);
+    }
+
+    /* Dil Seçici Navbar */
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 1rem 2rem;
+      z-index: 20;
+    }
+    .lang-switcher {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      backdrop-filter: blur(5px);
+      transition: background 0.2s;
+    }
+    .lang-switcher:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    main { 
+      padding: 1rem 1rem 4rem; 
+      max-width: 850px; 
+      text-shadow: 0 2px 12px rgba(0,0,0,.6); 
+      z-index: 1;
+    }
+    .logo { 
+      width: 150px; 
+      height: 150px; 
+      object-fit: contain; 
+      filter: drop-shadow(0 0 24px rgba(255,61,154,.7)); 
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    h1 { 
+      font-size: clamp(2.2rem, 6vw, 3.8rem); 
+      margin: 0.5rem 0; 
+      color: var(--pembe); 
+    }
+    .lead { 
+      font-size: 1.2rem; 
+      line-height: 1.6; 
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    /* Özellikler Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .feature-card {
+      background: var(--kart-bg);
+      border: 1px solid rgba(255, 61, 154, 0.3);
+      border-radius: 16px;
+      padding: 1.2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pembe);
+    }
+    .feature-card h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--pembe);
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    /* Butonlar */
+    .btn-container {
+      margin: 2rem 0;
+    }
+    .btn {
+      display: inline-block; 
+      margin: 0.5rem; 
+      padding: 0.9rem 1.8rem;
+      background: var(--pembe); 
+      color: #fff; 
+      border-radius: 999px;
+      text-decoration: none; 
+      font-weight: 700; 
+      text-shadow: none;
+      box-shadow: 0 4px 15px rgba(255, 61, 154, 0.4);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover {
+      background: var(--pembe-hover);
+      transform: translateY(-2px);
+    }
+    .btn.ikinci { 
+      background: transparent; 
+      border: 2px solid var(--pembe); 
+      box-shadow: none;
+    }
+    .btn.ikinci:hover {
+      background: rgba(255, 61, 154, 0.15);
+    }
+
+    .cmd-box {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 1rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    code { 
+      background: rgba(255, 255, 255, 0.2); 
+      padding: 0.2rem 0.5rem; 
+      border-radius: 6px; 
+      font-family: monospace;
+      color: #ff85c0;
+    }
+    small { 
+      opacity: 0.75; 
+      display: block; 
+      margin-top: 2.5rem; 
+      font-size: 0.85rem;
+    }
+
+    /* Müzik ve Oynatıcı */
+    .muzik {
+      position: fixed; 
+      right: 16px; 
+      bottom: 16px; 
+      z-index: 10;
+      padding: 0.7rem 1.2rem; 
+      border: 0; 
+      border-radius: 999px;
+      background: var(--pembe); 
+      color: #fff; 
+      font-weight: 700; 
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.2s;
+    }
+    .muzik:hover { transform: scale(1.05); }
+    #oynatici { 
+      position: fixed; 
+      left: 16px; 
+      bottom: 16px; 
+      z-index: 10; 
+    }
+    #oynatici iframe { 
+      border: 0; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
+
+  <header>
+    <button class="lang-switcher" id="langBtn" onclick="toggleLanguage()">English</button>
+  </header>
+
   <main>
     <img class="logo" src="yildiz-logo.png" alt="Yıldız Tilbe Linux logosu">
     <h1>Yıldız Tilbe Linux</h1>
-    <p>Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.</p>
-    <ul>
-      <li>🐧 Debian 13 (trixie) tabanlı, kararlı ve güvenilir</li>
-      <li>🖥️ Hafif ve hızlı XFCE masaüstü</li>
-      <li>🇹🇷 Türkçe dil, klavye ve saat dilimi hazır</li>
-      <li>💿 USB'den canlı açılır, beğenirsen kurulur</li>
-      <li>🎉 Terminalde meme komutları ve renkli karşılama</li>
-    </ul>
-    <a class="btn" href="https://github.com/bxiefr/yildiz-tilbe-linux/releases/latest">ISO İndir</a>
-    <a class="btn ikinci" href="https://github.com/bxiefr/yildiz-tilbe-linux">GitHub</a>
-    <p>Kurulumdan sonra terminale <code>yildiz</code> yaz.</p>
-    <small>Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile bağlantısı yoktur.</small>
+    <p class="lead" id="txt-lead">Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.</p>
+
+    <!-- Özellikler Kart Alanı -->
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>🐧 <span id="f1-title">Debian 13 (Trixie)</span></h3>
+        <p id="f1-desc">Güçlü ve kararlı Debian tabanı üzerine inşa edildi. Güncel paket desteği sunar.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🖥️ <span id="f2-title">Hafif XFCE Masaüstü</span></h3>
+        <p id="f2-desc">Düşük sistem kaynağı tüketimiyle hızlı, özelleştirilebilir mor-pembe tema düzeni.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🇹🇷 <span id="f3-title">Hazır Türkçe / TR Ready</span></h3>
+        <p id="f3-desc">Türkçe klavye düzeni, saat dilimi ve sistem dili varsayılan olarak yapılandırılmıştır.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🎉 <span id="f4-title">Yıldız Terminali</span></h3>
+        <p id="f4-desc">ASCII sanatı, eğlenceli terminal karşılama betikleri ve özel meme komutları.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🖼️ <span id="f5-title">Özel Duvar Kağıtları</span></h3>
+        <p id="f5-desc">İkonik Yıldız Tilbe görsellerinden ve temalı arka planlardan oluşan dahili duvar kağıdı paketi.</p>
+      </div>
+      <div class="feature-card">
+        <h3>💿 <span id="f6-title">Canlı (Live) USB</span></h3>
+        <p id="f6-desc">Sisteminize kurmadan önce USB üzerinden doğrudan deneyebilir, istediğinizde kurabilirsiniz.</p>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <a class="btn" id="txt-btn-iso" href="https://github.com/bxiefr/yildiz-tilbe-linux/releases/latest">ISO İndir</a>
+      <a class="btn ikinci" href="https://github.com/bxiefr/yildiz-tilbe-linux">GitHub</a>
+    </div>
+
+    <div class="cmd-box">
+      <span id="txt-cmd-info">Kurulumdan sonra terminale <code>yildiz</code> yaz.</span>
+    </div>
+
+    <small id="txt-disclaimer">Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile resmi bir bağlantısı yoktur.</small>
   </main>
 
   <button class="muzik" id="muzik" type="button">🎵 Müziği Aç</button>
   <div id="oynatici"></div>
 
   <script>
-    // Şarkıların YouTube video ID'leri (istediğin kadar ekleyebilirsin)
-    const IDS = ["yG-ODhNbmbQ", "xw1k4px1uQs", "6pYgGItOqtE"];
+    // --- ÇOKLU DİL DESTEĞİ (i18n) ---
+    const translations = {
+      tr: {
+        langBtn: "English",
+        lead: "Debian tabanlı, XFCE masaüstlü, Türkçe hazır gelen eğlenceli bir Linux dağıtımı.",
+        f1Title: "Debian 13 (Trixie)",
+        f1Desc: "Güçlü ve kararlı Debian tabanı üzerine inşa edildi. Güncel paket desteği sunar.",
+        f2Title: "Hafif XFCE Masaüstü",
+        f2Desc: "Düşük sistem kaynağı tüketimiyle hızlı, özelleştirilebilir mor-pembe tema düzeni.",
+        f3Title: "Hazır Türkçe Ortam",
+        f3Desc: "Türkçe klavye düzeni, saat dilimi ve sistem dili varsayılan olarak yapılandırılmıştır.",
+        f4Title: "Yıldız Terminali",
+        f4Desc: "ASCII sanatı, eğlenceli terminal karşılama betikleri ve özel meme komutları.",
+        f5Title: "Özel Duvar Kağıtları",
+        f5Desc: "İkonik Yıldız Tilbe görsellerinden ve temalı arka planlardan oluşan dahili duvar kağıdı paketi.",
+        f6Title: "Canlı (Live) USB",
+        f6Desc: "Sisteminize kurmadan önce USB üzerinden doğrudan deneyebilir, istediğinizde kurabilirsiniz.",
+        btnIso: "ISO İndir",
+        cmdInfo: 'Kurulumdan sonra terminale <code>yildiz</code> yaz.',
+        disclaimer: "Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile resmi bir bağlantısı yoktur.",
+        musicOpen: "🎵 Müziği Aç",
+        musicClose: "🔇 Müziği Kapat"
+      },
+      en: {
+        langBtn: "Türkçe",
+        lead: "A fun Linux distribution based on Debian with XFCE desktop, featuring Turkish out-of-the-box.",
+        f1Title: "Debian 13 (Trixie)",
+        f1Desc: "Built on a solid and stable Debian base with up-to-date software packages.",
+        f2Title: "Lightweight XFCE",
+        f2Desc: "Fast performance with low resource usage, customized with a purple-pink color scheme.",
+        f3Title: "Out-of-the-Box Turkish",
+        f3Desc: "Pre-configured Turkish keyboard layout, timezone, and system localization.",
+        f4Title: "Yıldız Terminal",
+        f4Desc: "Bundled with custom ASCII art, funny startup scripts, and meme commands.",
+        f5Title: "Custom Wallpapers",
+        f5Desc: "Includes an exclusive collection of iconic Yıldız Tilbe themed wallpapers.",
+        f6Title: "Live USB Support",
+        f6Desc: "Test it directly from a USB stick without installing, install whenever you are ready.",
+        btnIso: "Download ISO",
+        cmdInfo: 'After installation, type <code>yildiz</code> in the terminal.',
+        disclaimer: "Unofficial parody hobby project. Not affiliated with Yıldız Tilbe.",
+        musicOpen: "🎵 Play Music",
+        musicClose: "🔇 Mute Music"
+      }
+    };
 
+    let currentLang = 'tr';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'tr' ? 'en' : 'tr';
+      document.documentElement.lang = currentLang;
+      const t = translations[currentLang];
+
+      document.getElementById('langBtn').textContent = t.langBtn;
+      document.getElementById('txt-lead').textContent = t.lead;
+      
+      document.getElementById('f1-title').textContent = t.f1Title;
+      document.getElementById('f1-desc').textContent = t.f1Desc;
+      document.getElementById('f2-title').textContent = t.f2Title;
+      document.getElementById('f2-desc').textContent = t.f2Desc;
+      document.getElementById('f3-title').textContent = t.f3Title;
+      document.getElementById('f3-desc').textContent = t.f3Desc;
+      document.getElementById('f4-title').textContent = t.f4Title;
+      document.getElementById('f4-desc').textContent = t.f4Desc;
+      document.getElementById('f5-title').textContent = t.f5Title;
+      document.getElementById('f5-desc').textContent = t.f5Desc;
+      document.getElementById('f6-title').textContent = t.f6Title;
+      document.getElementById('f6-desc').textContent = t.f6Desc;
+
+      document.getElementById('txt-btn-iso').textContent = t.btnIso;
+      document.getElementById('txt-cmd-info').innerHTML = t.cmdInfo;
+      document.getElementById('txt-disclaimer').textContent = t.disclaimer;
+
+      // Müzik butonu metnini güncelle
+      btn.textContent = caliyor ? t.musicClose : t.musicOpen;
+    }
+
+    // --- MÜZİK OYNATICI ---
+    const IDS = ["yG-ODhNbmbQ", "xw1k4px1uQs", "6pYgGItOqtE"];
     const btn = document.getElementById("muzik");
     const kutu = document.getElementById("oynatici");
     let caliyor = false;
 
     btn.addEventListener("click", () => {
+      const t = translations[currentLang];
       if (!caliyor) {
         kutu.innerHTML =
           '<iframe width="200" height="200" ' +
           'src="https://www.youtube.com/embed/' + IDS[0] +
           '?autoplay=1&loop=1&playlist=' + IDS.join(",") + '" ' +
           'allow="autoplay; encrypted-media" title="Müzik"></iframe>';
-        btn.textContent = "🔇 Müziği Kapat";
+        btn.textContent = t.musicClose;
       } else {
         kutu.innerHTML = "";
-        btn.textContent = "🎵 Müziği Aç";
+        btn.textContent = t.musicOpen;
       }
       caliyor = !caliyor;
     });
