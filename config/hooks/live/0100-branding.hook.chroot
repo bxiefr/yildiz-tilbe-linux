@@ -1,0 +1,20 @@
+#!/bin/sh
+# Sistem kimligini degistirir (chroot icinde calisir).
+set -e
+
+cat > /etc/os-release <<'EOF'
+PRETTY_NAME="Yildiz Tilbe Linux 1.0"
+NAME="Yildiz Tilbe Linux"
+VERSION_ID="1.0"
+VERSION="1.0 (Ilk Konser)"
+ID=yildiztilbe
+ID_LIKE=debian
+HOME_URL="https://github.com/KULLANICI_ADIN/yildiz-tilbe-linux"
+EOF
+
+echo "yildiz-tilbe" > /etc/hostname
+
+cat > /etc/issue <<'EOF'
+Yildiz Tilbe Linux \n \l
+
+EOF

@@ -1,0 +1,32 @@
+# Masaüstü
+task-xfce-desktop
+task-turkish
+task-turkish-desktop
+lightdm
+xfce4-goodies
+
+# Canlı sistem
+live-boot
+live-config
+live-config-systemd
+calamares
+calamares-settings-debian
+
+# Temel araçlar
+firefox-esr
+firefox-esr-l10n-tr
+network-manager-gnome
+git
+curl
+wget
+nano
+vim
+htop
+fastfetch
+cowsay
+fortune-mod
+fortunes-min
+lolcat
+sl
+cmatrix
+figlet
