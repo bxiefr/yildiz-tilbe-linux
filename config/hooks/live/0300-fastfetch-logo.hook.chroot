@@ -1,0 +1,59 @@
+#!/bin/sh
+# fastfetch'te Debian logosu yerine Yildiz Tilbe yildizi gosterir (chroot icinde calisir).
+set -e
+
+mkdir -p /usr/share/yildiz /usr/share/fastfetch/presets
+
+# Logo (renk isaretleri: $1 pembe, $2 sari)
+cat > /usr/share/yildiz/logo.txt <<'EOF'
+$2
+$2                     ██
+$2                    ████
+$2                    ████
+$2                   ██████
+$2                   ██████
+$2                  ████████
+$2                 ██████████
+$2   ██████████████████████████████████████
+$1     ██████████████████████████████████
+$1        ████████████████████████████
+$1           ██████████████████████
+$1             ██████████████████
+$1             ██████████████████
+$1             ██████████████████
+$1            ████████████████████
+$1            ████████    ████████
+$1           ██████          ██████
+$1          ████                ████
+$1          ██                    ██
+$1
+EOF
+
+# fastfetch ayari
+cat > /usr/share/fastfetch/presets/yildiz.jsonc <<'EOF'
+{
+  "logo": {
+    "type": "file",
+    "source": "/usr/share/yildiz/logo.txt",
+    "color": { "1": "magenta", "2": "yellow" },
+    "padding": { "right": 3 }
+  }
+}
+EOF
+
+# Sistem geneli varsayilan olarak da dene
+mkdir -p /etc/xdg/fastfetch
+cp /usr/share/fastfetch/presets/yildiz.jsonc /etc/xdg/fastfetch/config.jsonc
+
+# "fastfetch" yazinca da bu ayar kullanilsin
+cat >> /etc/bash.bashrc <<'EOF'
+
+alias fastfetch='fastfetch --config /usr/share/fastfetch/presets/yildiz.jsonc'
+EOF
+
+# hosgeldin komutu da ayni ayari kullansin
+cat > /usr/local/bin/hosgeldin <<'EOF'
+#!/bin/sh
+exec fastfetch --config /usr/share/fastfetch/presets/yildiz.jsonc
+EOF
+chmod +x /usr/local/bin/hosgeldin
