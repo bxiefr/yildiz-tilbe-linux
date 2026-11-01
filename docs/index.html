@@ -28,15 +28,16 @@
       background-attachment: fixed;
     }
 
-    /* Arka plan görseli */
+    /* Arka plan slayt gösterisi (hafif blur) */
     body::before {
       content: ""; 
       position: fixed; 
       inset: -20px; 
       z-index: -2;
-      background: url("yildiztilbe.jpg") center / cover no-repeat;
+      background: url("wallpaper") center / cover no-repeat;
       filter: blur(8px);
       transform: scale(1.05);
+      transition: background-image 1s ease-in-out;
     }
     body::after {
       content: ""; 
@@ -98,12 +99,6 @@
       opacity: 0.95;
     }
 
-    section-title {
-      font-size: 1.8rem;
-      color: var(--pembe);
-      margin: 3rem 0 1.5rem;
-    }
-
     /* Özellikler Grid */
     .features-grid {
       display: grid;
@@ -149,7 +144,7 @@
     }
     .wallpapers-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.2rem;
       margin-bottom: 2rem;
     }
@@ -169,7 +164,7 @@
     }
     .wallpaper-img-container {
       width: 100%;
-      height: 160px;
+      height: 140px;
       overflow: hidden;
       background: rgba(0,0,0,0.3);
     }
@@ -183,29 +178,24 @@
       transform: scale(1.08);
     }
     .wallpaper-info {
-      padding: 1rem;
+      padding: 0.8rem;
     }
     .wallpaper-info h4 {
       margin: 0 0 0.3rem 0;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: #fff;
-    }
-    .wallpaper-info p {
-      margin: 0 0 0.8rem 0;
-      font-size: 0.85rem;
-      opacity: 0.8;
     }
     .wp-btn {
       display: block;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.4rem;
       background: rgba(255, 61, 154, 0.2);
       border: 1px solid var(--pembe);
       color: #fff;
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       transition: background 0.2s;
     }
@@ -334,40 +324,47 @@
       </div>
     </div>
 
-    <!-- Duvar Kağıtları Sergileme Alanı -->
+    <!-- Duvar Kağıtları Slidelar (Sitede sergileme alanı) -->
     <h2 class="section-heading" id="txt-wp-heading">Dağıtımla Gelen Duvar Kağıtları</h2>
     <div class="wallpapers-grid">
-      <!-- Duvar Kağıdı 1 -->
+      <!-- wallpaper -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="yildiztilbe.jpg" alt="Delikanlım Edition Wallpaper">
+          <img src="wallpaper" alt="Wallpaper">
         </div>
         <div class="wallpaper-info">
-          <h4 id="wp1-title">Delikanlım Edition</h4>
-          <p id="wp1-desc">Mor ve pembe tonlarında optimize edilmiş ana tema arka planı.</p>
-          <a class="wp-btn" href="yildiztilbe.jpg" target="_blank" id="wp1-btn">Görüntüle / İndir</a>
+          <h4>Wallpaper</h4>
+          <a class="wp-btn" href="wallpaper" target="_blank" id="wp-btn-text">Görüntüle</a>
         </div>
       </div>
-      <!-- Duvar Kağıdı 2 -->
-      <div class="wallpaper-img-card wallpaper-card">
-        <div class="wallpaper-img-container">
-          <img src="yildiz-logo.png" alt="Aşk Laftan Anlamaz Wallpaper">
-        </div>
-        <div class="wallpaper-info">
-          <h4 id="wp2-title">Aşk Laftan Anlamaz</h4>
-          <p id="wp2-desc">Minimalist logo ve neon parlamalı özel XFCE arka planı.</p>
-          <a class="wp-btn" href="yildiz-logo.png" target="_blank" id="wp2-btn">Görüntüle / İndir</a>
-        </div>
-      </div>
-      <!-- Duvar Kağıdı 3 -->
+      <!-- wallpaper1 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="yildiztilbe.jpg" alt="Sevsinler Seni Wallpaper">
+          <img src="wallpaper1" alt="Wallpaper 1">
         </div>
         <div class="wallpaper-info">
-          <h4 id="wp3-title">Sevsinler Seni</h4>
-          <p id="wp3-desc">Yıldız Tilbe'nin ikonik tarzını masaüstünüze taşıyan retro tasarım.</p>
-          <a class="wp-btn" href="yildiztilbe.jpg" target="_blank" id="wp3-btn">Görüntüle / İndir</a>
+          <h4>Wallpaper 1</h4>
+          <a class="wp-btn" href="wallpaper1" target="_blank" id="wp-btn-text2">Görüntüle</a>
+        </div>
+      </div>
+      <!-- wallpaper2 -->
+      <div class="wallpaper-card">
+        <div class="wallpaper-img-container">
+          <img src="wallpaper2" alt="Wallpaper 2">
+        </div>
+        <div class="wallpaper-info">
+          <h4>Wallpaper 2</h4>
+          <a class="wp-btn" href="wallpaper2" target="_blank" id="wp-btn-text3">Görüntüle</a>
+        </div>
+      </div>
+      <!-- wallpaper3 -->
+      <div class="wallpaper-card">
+        <div class="wallpaper-img-container">
+          <img src="wallpaper3" alt="Wallpaper 3">
+        </div>
+        <div class="wallpaper-info">
+          <h4>Wallpaper 3</h4>
+          <a class="wp-btn" href="wallpaper3" target="_blank" id="wp-btn-text4">Görüntüle</a>
         </div>
       </div>
     </div>
@@ -388,6 +385,41 @@
   <div id="oynatici"></div>
 
   <script>
+    // --- ARKA PLAN OTOMATİK SLAYT (SLIDESHOW) ---
+    const wallpapers = ["wallpaper", "wallpaper1", "wallpaper2", "wallpaper3"];
+    let currentIndex = 0;
+
+    function changeBackgroundSlide() {
+      currentIndex = (currentIndex + 1) % wallpapers.length;
+      // body::before öğesinin background-image'ini değiştiriyoruz
+      document.documentElement.style.setProperty('--bg-image', `url('${wallpapers[currentIndex]}')`);
+      // Doğrudan stil enjeksiyonu ile arka planı güncelleyelim:
+      document.body.style.setProperty('--current-bg', `url('${wallpapers[currentIndex]}')`);
+    }
+
+    // CSS'te body::before için dinamik URL kullanabilmek adına:
+    const styleSheet = document.styleSheets[0];
+    // Her 6 saniyede bir arka plan duvar kağıdını değiştir (slayt etkisi)
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % wallpapers.length;
+      document.body.style.setProperty('--bg-url', `url('${wallpapers[currentIndex]}')`);
+      // ::before elementini tetiklemek için bir kural güncelleyelim
+    }, 5000);
+
+    // Daha temiz JS tabanlı arka plan değiştirme:
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % wallpapers.length;
+      // Style tag ekleyerek body::before arka planını güncelliyoruz
+      let dynamicStyle = document.getElementById('dynamic-bg');
+      if (!dynamicStyle) {
+        dynamicStyle = document.createElement('style');
+        dynamicStyle.id = 'dynamic-bg';
+        document.head.appendChild(dynamicStyle);
+      }
+      dynamicStyle.innerHTML = `body::before { background-image: url('${wallpapers[currentIndex]}') !important; }`;
+    }, 6000); // 6 saniyede bir değişir
+
+
     // --- ÇOKLU DİL DESTEĞİ (i18n) ---
     const translations = {
       tr: {
@@ -406,13 +438,7 @@
         f6Title: "Canlı (Live) USB",
         f6Desc: "Sisteminize kurmadan önce USB üzerinden doğrudan deneyebilir, istediğinizde kurabilirsiniz.",
         wpHeading: "Dağıtımla Gelen Duvar Kağıtları",
-        wp1Title: "Delikanlım Edition",
-        wp1Desc: "Mor ve pembe tonlarında optimize edilmiş ana tema arka planı.",
-        wp2Title: "Aşk Laftan Anlamaz",
-        wp2Desc: "Minimalist logo ve neon parlamalı özel XFCE arka planı.",
-        wp3Title: "Sevsinler Seni",
-        wp3Desc: "Yıldız Tilbe'nin ikonik tarzını masaüstünüze taşıyan retro tasarım.",
-        wpBtn: "Görüntüle / İndir",
+        wpBtn: "Görüntüle",
         btnIso: "ISO İndir",
         cmdInfo: 'Kurulumdan sonra terminale <code>yildiz</code> yaz.',
         disclaimer: "Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile resmi bir bağlantısı yoktur.",
@@ -435,13 +461,7 @@
         f6Title: "Live USB Support",
         f6Desc: "Test it directly from a USB stick without installing, install whenever you are ready.",
         wpHeading: "Included Wallpapers",
-        wp1Title: "Delikanlım Edition",
-        wp1Desc: "Main theme background optimized in purple and pink tones.",
-        wp2Title: "Aşk Laftan Anlamaz",
-        wp2Desc: "Custom XFCE background featuring a minimalist logo and neon glow.",
-        wp3Title: "Sevsinler Seni",
-        wp3Desc: "Retro design bringing the iconic style of Yıldız Tilbe to your desktop.",
-        wpBtn: "View / Download",
+        wpBtn: "View",
         btnIso: "Download ISO",
         cmdInfo: 'After installation, type <code>yildiz</code> in the terminal.',
         disclaimer: "Unofficial parody hobby project. Not affiliated with Yıldız Tilbe.",
@@ -474,14 +494,6 @@
       document.getElementById('f6-desc').textContent = t.f6Desc;
 
       document.getElementById('txt-wp-heading').textContent = t.wpHeading;
-      document.getElementById('wp1-title').textContent = t.wp1Title;
-      document.getElementById('wp1-desc').textContent = t.wp1Desc;
-      document.getElementById('wp2-title').textContent = t.wp2Title;
-      document.getElementById('wp2-desc').textContent = t.wp2Desc;
-      document.getElementById('wp3-title').textContent = t.wp3Title;
-      document.getElementById('wp3-desc').textContent = t.wp3Desc;
-
-      // Tüm "Görüntüle / İndir" butonlarını güncelle
       document.querySelectorAll('.wp-btn').forEach(el => el.textContent = t.wpBtn);
 
       document.getElementById('txt-btn-iso').textContent = t.btnIso;
