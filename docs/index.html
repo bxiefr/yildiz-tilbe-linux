@@ -34,7 +34,7 @@
       position: fixed; 
       inset: -20px; 
       z-index: -2;
-      background: url("config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper") center / cover no-repeat;
+      background: url("https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper.png") center / cover no-repeat;
       filter: blur(8px);
       transform: scale(1.05);
       transition: background-image 1s ease-in-out;
@@ -330,41 +330,41 @@
       <!-- wallpaper -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper" alt="Wallpaper">
+          <img src="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper.png" alt="Wallpaper">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper</h4>
-          <a class="wp-btn" href="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper" target="_blank" id="wp-btn-text">Görüntüle</a>
+          <a class="wp-btn" href="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper.png" target="_blank" id="wp-btn-text">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper1 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper1" alt="Wallpaper 1">
+          <img src="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper1.png" alt="Wallpaper 1">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 1</h4>
-          <a class="wp-btn" href="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper1" target="_blank" id="wp-btn-text2">Görüntüle</a>
+          <a class="wp-btn" href="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper1.png" target="_blank" id="wp-btn-text2">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper2 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper2" alt="Wallpaper 2">
+          <img src="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper2.png" alt="Wallpaper 2">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 2</h4>
-          <a class="wp-btn" href="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper2" target="_blank" id="wp-btn-text3">Görüntüle</a>
+          <a class="wp-btn" href="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper2.png" target="_blank" id="wp-btn-text3">Görüntüle</a>
         </div>
       </div>
       <!-- wallpaper3 -->
       <div class="wallpaper-card">
         <div class="wallpaper-img-container">
-          <img src="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper3" alt="Wallpaper 3">
+          <img src="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper3.png" alt="Wallpaper 3">
         </div>
         <div class="wallpaper-info">
           <h4>Wallpaper 3</h4>
-          <a class="wp-btn" href="config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper3" target="_blank" id="wp-btn-text4">Görüntüle</a>
+          <a class="wp-btn" href="https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper3.png" target="_blank" id="wp-btn-text4">Görüntüle</a>
         </div>
       </div>
     </div>
@@ -386,11 +386,12 @@
 
   <script>
     // --- ARKA PLAN OTOMATİK SLAYT (SLIDESHOW) ---
+    const baseRaw = "https://raw.githubusercontent.com/bxiefr/yildiz-tilbe-linux/main/config/includes.chroot/usr/share/backgrounds/yildiz/";
     const wallpapers = [
-      "config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper", 
-      "config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper1", 
-      "config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper2", 
-      "config/includes.chroot/usr/share/backgrounds/yildiz/wallpaper3"
+      baseRaw + "wallpaper.png", 
+      baseRaw + "wallpaper1.png", 
+      baseRaw + "wallpaper2.png", 
+      baseRaw + "wallpaper3.png"
     ];
     let currentIndex = 0;
 
