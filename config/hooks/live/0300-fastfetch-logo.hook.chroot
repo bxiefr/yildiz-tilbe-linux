@@ -37,7 +37,27 @@ cat > /usr/share/fastfetch/presets/yildiz.jsonc <<'EOF'
     "source": "/usr/share/yildiz/logo.txt",
     "color": { "1": "magenta", "2": "yellow" },
     "padding": { "right": 3 }
-  }
+  },
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "de",
+    "wm",
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory",
+    "disk",
+    "locale",
+    "break",
+    "colors"
+  ]
 }
 EOF
 
