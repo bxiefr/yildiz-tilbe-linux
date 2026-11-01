@@ -71,7 +71,8 @@
 
     main { 
       padding: 1rem 1rem 4rem; 
-      max-width: 850px; 
+      max-width: 900px; 
+      width: 100%;
       text-shadow: 0 2px 12px rgba(0,0,0,.6); 
       z-index: 1;
     }
@@ -97,10 +98,16 @@
       opacity: 0.95;
     }
 
+    section-title {
+      font-size: 1.8rem;
+      color: var(--pembe);
+      margin: 3rem 0 1.5rem;
+    }
+
     /* Özellikler Grid */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.2rem;
       margin: 2rem 0;
       text-align: left;
@@ -131,6 +138,79 @@
       font-size: 0.95rem;
       line-height: 1.5;
       opacity: 0.9;
+    }
+
+    /* Duvar Kağıtları Galeri Alanı */
+    .section-heading {
+      color: var(--pembe);
+      font-size: 1.7rem;
+      margin: 3rem 0 1rem;
+      font-weight: 700;
+    }
+    .wallpapers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .wallpaper-card {
+      background: var(--kart-bg);
+      border: 1px solid rgba(255, 61, 154, 0.25);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s, border-color 0.2s;
+      text-align: left;
+    }
+    .wallpaper-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pembe);
+    }
+    .wallpaper-img-container {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+    }
+    .wallpaper-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .wallpaper-card:hover img {
+      transform: scale(1.08);
+    }
+    .wallpaper-info {
+      padding: 1rem;
+    }
+    .wallpaper-info h4 {
+      margin: 0 0 0.3rem 0;
+      font-size: 1.05rem;
+      color: #fff;
+    }
+    .wallpaper-info p {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+    .wp-btn {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      background: rgba(255, 61, 154, 0.2);
+      border: 1px solid var(--pembe);
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .wp-btn:hover {
+      background: var(--pembe);
     }
 
     /* Butonlar */
@@ -254,6 +334,44 @@
       </div>
     </div>
 
+    <!-- Duvar Kağıtları Sergileme Alanı -->
+    <h2 class="section-heading" id="txt-wp-heading">Dağıtımla Gelen Duvar Kağıtları</h2>
+    <div class="wallpapers-grid">
+      <!-- Duvar Kağıdı 1 -->
+      <div class="wallpaper-card">
+        <div class="wallpaper-img-container">
+          <img src="yildiztilbe.jpg" alt="Delikanlım Edition Wallpaper">
+        </div>
+        <div class="wallpaper-info">
+          <h4 id="wp1-title">Delikanlım Edition</h4>
+          <p id="wp1-desc">Mor ve pembe tonlarında optimize edilmiş ana tema arka planı.</p>
+          <a class="wp-btn" href="yildiztilbe.jpg" target="_blank" id="wp1-btn">Görüntüle / İndir</a>
+        </div>
+      </div>
+      <!-- Duvar Kağıdı 2 -->
+      <div class="wallpaper-img-card wallpaper-card">
+        <div class="wallpaper-img-container">
+          <img src="yildiz-logo.png" alt="Aşk Laftan Anlamaz Wallpaper">
+        </div>
+        <div class="wallpaper-info">
+          <h4 id="wp2-title">Aşk Laftan Anlamaz</h4>
+          <p id="wp2-desc">Minimalist logo ve neon parlamalı özel XFCE arka planı.</p>
+          <a class="wp-btn" href="yildiz-logo.png" target="_blank" id="wp2-btn">Görüntüle / İndir</a>
+        </div>
+      </div>
+      <!-- Duvar Kağıdı 3 -->
+      <div class="wallpaper-card">
+        <div class="wallpaper-img-container">
+          <img src="yildiztilbe.jpg" alt="Sevsinler Seni Wallpaper">
+        </div>
+        <div class="wallpaper-info">
+          <h4 id="wp3-title">Sevsinler Seni</h4>
+          <p id="wp3-desc">Yıldız Tilbe'nin ikonik tarzını masaüstünüze taşıyan retro tasarım.</p>
+          <a class="wp-btn" href="yildiztilbe.jpg" target="_blank" id="wp3-btn">Görüntüle / İndir</a>
+        </div>
+      </div>
+    </div>
+
     <div class="btn-container">
       <a class="btn" id="txt-btn-iso" href="https://github.com/bxiefr/yildiz-tilbe-linux/releases/latest">ISO İndir</a>
       <a class="btn ikinci" href="https://github.com/bxiefr/yildiz-tilbe-linux">GitHub</a>
@@ -287,6 +405,14 @@
         f5Desc: "İkonik Yıldız Tilbe görsellerinden ve temalı arka planlardan oluşan dahili duvar kağıdı paketi.",
         f6Title: "Canlı (Live) USB",
         f6Desc: "Sisteminize kurmadan önce USB üzerinden doğrudan deneyebilir, istediğinizde kurabilirsiniz.",
+        wpHeading: "Dağıtımla Gelen Duvar Kağıtları",
+        wp1Title: "Delikanlım Edition",
+        wp1Desc: "Mor ve pembe tonlarında optimize edilmiş ana tema arka planı.",
+        wp2Title: "Aşk Laftan Anlamaz",
+        wp2Desc: "Minimalist logo ve neon parlamalı özel XFCE arka planı.",
+        wp3Title: "Sevsinler Seni",
+        wp3Desc: "Yıldız Tilbe'nin ikonik tarzını masaüstünüze taşıyan retro tasarım.",
+        wpBtn: "Görüntüle / İndir",
         btnIso: "ISO İndir",
         cmdInfo: 'Kurulumdan sonra terminale <code>yildiz</code> yaz.',
         disclaimer: "Resmi değildir, parodi bir hobi projesidir. Yıldız Tilbe ile resmi bir bağlantısı yoktur.",
@@ -308,6 +434,14 @@
         f5Desc: "Includes an exclusive collection of iconic Yıldız Tilbe themed wallpapers.",
         f6Title: "Live USB Support",
         f6Desc: "Test it directly from a USB stick without installing, install whenever you are ready.",
+        wpHeading: "Included Wallpapers",
+        wp1Title: "Delikanlım Edition",
+        wp1Desc: "Main theme background optimized in purple and pink tones.",
+        wp2Title: "Aşk Laftan Anlamaz",
+        wp2Desc: "Custom XFCE background featuring a minimalist logo and neon glow.",
+        wp3Title: "Sevsinler Seni",
+        wp3Desc: "Retro design bringing the iconic style of Yıldız Tilbe to your desktop.",
+        wpBtn: "View / Download",
         btnIso: "Download ISO",
         cmdInfo: 'After installation, type <code>yildiz</code> in the terminal.',
         disclaimer: "Unofficial parody hobby project. Not affiliated with Yıldız Tilbe.",
@@ -339,11 +473,21 @@
       document.getElementById('f6-title').textContent = t.f6Title;
       document.getElementById('f6-desc').textContent = t.f6Desc;
 
+      document.getElementById('txt-wp-heading').textContent = t.wpHeading;
+      document.getElementById('wp1-title').textContent = t.wp1Title;
+      document.getElementById('wp1-desc').textContent = t.wp1Desc;
+      document.getElementById('wp2-title').textContent = t.wp2Title;
+      document.getElementById('wp2-desc').textContent = t.wp2Desc;
+      document.getElementById('wp3-title').textContent = t.wp3Title;
+      document.getElementById('wp3-desc').textContent = t.wp3Desc;
+
+      // Tüm "Görüntüle / İndir" butonlarını güncelle
+      document.querySelectorAll('.wp-btn').forEach(el => el.textContent = t.wpBtn);
+
       document.getElementById('txt-btn-iso').textContent = t.btnIso;
       document.getElementById('txt-cmd-info').innerHTML = t.cmdInfo;
       document.getElementById('txt-disclaimer').textContent = t.disclaimer;
 
-      // Müzik butonu metnini güncelle
       btn.textContent = caliyor ? t.musicClose : t.musicOpen;
     }
 
