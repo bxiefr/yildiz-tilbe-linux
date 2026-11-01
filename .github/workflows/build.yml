@@ -1,0 +1,66 @@
+name: ISO Derle ve Release Cikar
+
+# Sadece elle calisir: Actions sekmesi -> bu workflow -> Run workflow
+on:
+  workflow_dispatch:
+    inputs:
+      surum:
+        description: "Surum etiketi (ornek: v1.0)"
+        required: true
+        default: "v1.0"
+      release_olustur:
+        description: "Derledikten sonra Releases sayfasina yukle"
+        type: boolean
+        default: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+      options: --privileged
+    steps:
+      - name: Araclari kur
+        run: |
+          apt-get update
+          apt-get install -y live-build git ca-certificates xz-utils
+
+      - uses: actions/checkout@v4
+
+      - name: ISO derle
+        run: |
+          chmod +x auto/* config/hooks/live/*.chroot
+          lb clean --purge || true
+          lb config
+          lb build
+
+      - name: Sha256 uret
+        run: sha256sum *.iso > SHA256SUMS
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: yildiz-tilbe-iso
+          path: |
+            *.iso
+            SHA256SUMS
+
+  release:
+    needs: build
+    if: ${{ inputs.release_olustur }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: yildiz-tilbe-iso
+
+      - name: Release yayinla
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.surum }}
+          name: Yildiz Tilbe Linux ${{ inputs.surum }}
+          files: |
+            *.iso
+            SHA256SUMS
+          generate_release_notes: true
